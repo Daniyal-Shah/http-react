@@ -41,10 +41,16 @@ class App extends React.Component {
     this.setState({ posts });
 
     try {
-      await axios.delete(apiEndPoint + "/" + post.id);
+      await axios.delete(apiEndPoint + "/99" + post.id);
       throw new Error("");
     } catch (error) {
       alert(error);
+      if (error.response && error.response.status === 404) {
+        alert("This post has already been deleted");
+      } else {
+        alert("An unexpexted error occured");
+      }
+
       this.setState({ posts: originalPosts });
     }
   };
