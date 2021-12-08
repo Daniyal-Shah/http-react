@@ -4,7 +4,8 @@ import React from "react";
 // import axios from "axios";
 import http from "./services/httpService";
 import config from "./config.json";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class App extends React.Component {
   state = {
     posts: [],
@@ -56,6 +57,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container p-5">
+        <ToastContainer />
         <div className="row">
           <div className="col">
             <button className="btn btn-primary" onClick={this.handleAdd}>

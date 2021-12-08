@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -12,7 +12,7 @@ axios.interceptors.response.use(null, (error) => {
   // - Display generic and friendly error message to user
 
   if (!expectedError) {
-    alert("An unexpected error occurred");
+    toast.error("An unexpected error occurred");
     console.log(error);
     // toast("An unexpected error occurred");
     // logger.log(error);
