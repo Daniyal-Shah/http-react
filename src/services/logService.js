@@ -1,16 +1,23 @@
-// import * as Sentry from '@sentry/browser';
+import * as Sentry from "@sentry/browser";
+import { Integrations } from "@sentry/tracing";
 
-// function init() {
-//   Sentry.init({
-//     dsn: "https://d2df9a7d37914f65885e0d2c949123ac@sentry.io/1502050",
-//   });
-// }
+function init() {
+  Sentry.init({
+    dsn: "https://90af5e588f5842b68320c0eeac2c4e0a@o1086700.ingest.sentry.io/6099075",
+    integrations: [new Integrations.BrowserTracing()],
 
-// function log(error) {
-//   Sentry.captureException(error);
-// }
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+  });
+}
 
-// export default {
-//   init,
-//   log,
-// };
+function log(error) {
+  Sentry.captureException(error);
+}
+
+export default {
+  init,
+  log,
+};

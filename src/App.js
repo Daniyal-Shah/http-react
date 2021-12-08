@@ -1,11 +1,11 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-// import axios from "axios";
 import http from "./services/httpService";
 import config from "./config.json";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 class App extends React.Component {
   state = {
     posts: [],
@@ -44,7 +44,7 @@ class App extends React.Component {
     this.setState({ posts });
 
     try {
-      await http.delete(config.apiEndPoint + "/" + post.id);
+      await http.delete("ss" + config.apiEndPoint + "/" + post.id);
     } catch (error) {
       if (error.response && error.response.status === 404) {
         alert("This post has already been deleted");
