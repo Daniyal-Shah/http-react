@@ -3,6 +3,19 @@ import "./App.css";
 import React from "react";
 import axios from "axios";
 
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
+
+  if (!expectedError) {
+    alert("An unexpexted error occured");
+  }
+
+  return Promise.reject(error);
+});
+
 const apiEndPoint = "https://jsonplaceholder.typicode.com/posts";
 class App extends React.Component {
   state = {
@@ -34,6 +47,7 @@ class App extends React.Component {
     posts[index] = post;
     this.setState({ posts });
   };
+
   handleDelete = async (post) => {
     const originalPosts = this.state.posts;
 
@@ -41,14 +55,10 @@ class App extends React.Component {
     this.setState({ posts });
 
     try {
-      await axios.delete(apiEndPoint + "/99" + post.id);
-      throw new Error("");
+      await axios.delete(apiEndPoint + "/999" + post.id);
     } catch (error) {
-      alert(error);
       if (error.response && error.response.status === 404) {
         alert("This post has already been deleted");
-      } else {
-        alert("An unexpexted error occured");
       }
 
       this.setState({ posts: originalPosts });
